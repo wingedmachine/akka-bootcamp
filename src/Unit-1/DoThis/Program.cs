@@ -12,7 +12,7 @@ namespace WinTail
         {
             MyActorSystem = ActorSystem.Create("MyActorStystem");
 
-            Props consoleWriterProps = Props.Create(typeof(ConsoleWriterActor));
+            Props consoleWriterProps = Props.Create(() => new ConsoleWriterActor());
             IActorRef consoleWriterActor = MyActorSystem.ActorOf(consoleWriterProps, "consoleWriterActor");
 
             Props validationActorProps = Props.Create(() => new ValidationActor(consoleWriterActor));
