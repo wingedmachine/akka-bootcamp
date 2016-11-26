@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileObserver.cs" />
     <Compile Include="FileValidatorActor.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="ConsoleReaderActor.cs" />
