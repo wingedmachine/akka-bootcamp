@@ -36,7 +36,7 @@ namespace WinTail
                 }
                 else
                 {
-                    Self.Tell(new Messages.ValidationError("An odd number of chars? Fuck you."));
+                    _consoleWriterActor.Tell(new Messages.ValidationError("An odd number of chars? Fuck you."));
                 }
             }
 

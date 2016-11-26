@@ -43,7 +43,7 @@ namespace WinTail
         private void GetAndValidateInput()
         {
             var message = Console.ReadLine();
-            if (string.IsNullOrEmpty(message) &&
+            if (!string.IsNullOrEmpty(message) &&
                 String.Equals(message, ExitCommand, StringComparison.OrdinalIgnoreCase))
             {
                 // shut it all down
