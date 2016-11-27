@@ -14,8 +14,8 @@ namespace WinTail
         {
             public StartTail(string filePath, IActorRef reporterActor)
             {
-                filePath = filePath;
-                reporterActor = reporterActor;
+                FilePath = filePath;
+                ReporterActor = reporterActor;
             }
 
             public string FilePath { get; private set; }
@@ -29,7 +29,7 @@ namespace WinTail
         {
             public StopTail(string filePath)
             {
-                filePath = filePath;
+                FilePath = filePath;
             }
 
             public string FilePath { get; private set; }
@@ -41,7 +41,7 @@ namespace WinTail
             if (message is StartTail)
             {
                 var msg = message as StartTail;
-                //wert
+                Context.ActorOf(Props.Create(() => new TailActor(msg.ReporterActor, msg.FilePath)));
             }
         }
 
