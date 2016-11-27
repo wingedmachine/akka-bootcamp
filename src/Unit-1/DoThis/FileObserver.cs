@@ -50,11 +50,21 @@ namespace WinTail
         }
 
         /// <summary>
+        /// callback for <see cref="FileSystemWatcher"/> file error events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <paramm name="e"></paramm>
+        void OnFileError(object sender, ErrorEventArgs e)
+        {
+            _tailActor.Tell(new TailActor.FileError(_fileNameOnly, e.GetException().Message), ActorRefs.NoSender);
+        }
+
+        /// <summary>
         /// callback for <see cref="FileSystemWatcher"/> file change events
         /// </summary>
         /// <param name="sender"></param>
         /// <paramm name="e"></paramm>
-        void OnFileChanged(objectSender, FileSystemEventArgs e)
+        void OnFileChanged(object sender, FileSystemEventArgs e)
         {
             if (e.ChangeType == WatcherChangeTypes.Changed)
             {
