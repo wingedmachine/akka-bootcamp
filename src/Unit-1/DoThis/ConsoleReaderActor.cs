@@ -31,9 +31,7 @@ namespace WinTail
         #region Internal methods
         private void DoPrintInstructions()
         {
-            Console.WriteLine("Write some shit.");
-            Console.WriteLine("Not all shit is valid shit...\n\n");
-            Console.WriteLine("'Exit' to exit. Duh.");
+            Console.WriteLine("Gimmie dat URI");
         }
 
         /// <summary>
