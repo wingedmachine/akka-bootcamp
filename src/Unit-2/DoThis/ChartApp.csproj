@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Actors\ChartingActor.cs" />
     <Compile Include="Actors\ChartingMessages.cs" />
+    <Compile Include="Actors\PerformanceCounterCoordinatorActor.cs" />
     <Compile Include="Actors\PerformanceCounterActor.cs" />
     <Compile Include="ChartDataHelper.cs" />
     <Compile Include="Main.cs">
