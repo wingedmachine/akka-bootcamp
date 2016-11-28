@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\ChartingActor.cs" />
+    <Compile Include="Actors\ChartingMessages.cs" />
     <Compile Include="ChartDataHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
