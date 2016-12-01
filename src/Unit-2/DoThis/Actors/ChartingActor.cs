@@ -42,7 +42,7 @@ namespace ChartApp.Actors
 
         #endregion
 
-            public const int MaxPoints = 250;
+        public const int MaxPoints = 250;
 
         private readonly Chart _chart;
         private Dictionary<string, Series> _seriesIndex;
@@ -75,6 +75,10 @@ namespace ChartApp.Actors
 
             //delete any existing series
             _chart.Series.Clear();
+
+            var area = _chart.ChartAreas[0];
+            area.AxisX.IntervalType = DateTimeIntervalType.Number;
+            area.AxisY.IntervalType = DateTimeIntervalType.Number;
 
             if (_seriesIndex.Any())
             {
@@ -117,6 +121,7 @@ namespace ChartApp.Actors
                 !_seriesIndex.ContainsKey(metric.Series))
             {
                 var series = _seriesIndex[metric.Series];
+                if (series.Points == null) return;
                 series.Points.AddXY(xPosCounter++, metric.CounterValue);
                 while (series.Points.Count > MaxPoints) series.Points.RemoveAt(0);
                 SetChartBoundaries();
@@ -133,7 +138,7 @@ namespace ChartApp.Actors
             maxAxisX = xPosCounter;
             minAxisX = xPosCounter - MaxPoints;
             maxAxisY = yValues.Count > 0 ? Math.Ceiling(yValues.Max()) : 1.0d;
-            maxAxisY = yValues.Count > 0 ? Math.Floor(yValues.Min()) : 0.0d;
+            minAxisY = yValues.Count > 0 ? Math.Floor(yValues.Min()) : 0.0d;
             if (allPoints.Count > 2)
             {
                 var area = _chart.ChartAreas[0];

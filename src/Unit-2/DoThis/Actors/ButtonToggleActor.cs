@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Akka.Actor;
 
 namespace ChartApp.Actors
@@ -51,7 +50,7 @@ namespace ChartApp.Actors
             _isToggledOn = !_isToggledOn;
             _myButton.Text = string.Format("{0} ({1})", 
                 _myCounterType.ToString(), 
-                _isToggledOn ? "ON" : "OFF");
+                _isToggledOn ? "on" : "off");
         }
     }
 }

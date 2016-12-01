@@ -37,8 +37,8 @@ namespace ChartApp.Actors
             new Dictionary<CounterType, Func<PerformanceCounter>>()
         {
             {CounterType.Cpu, () => new PerformanceCounter("Processor", "% Processor Time", "_Total", true) },
-            {CounterType.Disk, () => new PerformanceCounter("Memory", "% Committed Bytes in Use", true) },
-            {CounterType.Memory, () => new PerformanceCounter("LogicalDisk", "% Dick Time", "_Total", true) },
+            {CounterType.Disk, () => new PerformanceCounter("Memory", "% Committed Bytes In Use", true) },
+            {CounterType.Memory, () => new PerformanceCounter("LogicalDisk", "% Disk Time", "_Total", true) },
         };
 
         private static readonly Dictionary<CounterType, Func<Series>> CounterSeries =

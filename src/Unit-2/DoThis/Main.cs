@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 using Akka.Actor;
 using Akka.Util.Internal;
 using ChartApp.Actors;
@@ -12,7 +11,7 @@ namespace ChartApp
     {
         private IActorRef _chartActor;
         private IActorRef _coordinatorActor;
-        private readonly AtomicCounter _seriesCounter = new AtomicCounter(1);
+        private AtomicCounter _seriesCounter = new AtomicCounter(1);
         private Dictionary<CounterType, IActorRef> _toggleActors = new Dictionary<CounterType, IActorRef>();
 
         public Main()
@@ -54,6 +53,8 @@ namespace ChartApp
 
         #endregion
 
+        #region Button handlers
+
         private void btnCpu_Click(object sender, EventArgs e)
         {
             _toggleActors[CounterType.Cpu].Tell(new ButtonToggleActor.Toggle());
@@ -68,5 +69,7 @@ namespace ChartApp
         {
             _toggleActors[CounterType.Disk].Tell(new ButtonToggleActor.Toggle());
         }
+
+        #endregion
     }
 }
