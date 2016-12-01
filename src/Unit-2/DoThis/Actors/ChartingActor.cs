@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 using Akka.Actor;
 
@@ -80,6 +81,8 @@ namespace ChartApp.Actors
             area.AxisX.IntervalType = DateTimeIntervalType.Number;
             area.AxisY.IntervalType = DateTimeIntervalType.Number;
 
+            SetChartBoundaries();
+
             if (_seriesIndex.Any())
             {
                 foreach (var series in _seriesIndex)
@@ -106,7 +109,7 @@ namespace ChartApp.Actors
         private void HandleRemoveSeries(RemoveSeries series)
         {
             if (!string.IsNullOrEmpty(series.SeriesName) &&
-                !_seriesIndex.ContainsKey(series.SeriesName))
+                _seriesIndex.ContainsKey(series.SeriesName))
             {
                 var seriesToRemove = _seriesIndex[series.SeriesName];
                 _seriesIndex.Remove(series.SeriesName);
@@ -118,7 +121,7 @@ namespace ChartApp.Actors
         private void HandleMetrics(Metric metric)
         {
             if (!string.IsNullOrEmpty(metric.Series) &&
-                !_seriesIndex.ContainsKey(metric.Series))
+                _seriesIndex.ContainsKey(metric.Series))
             {
                 var series = _seriesIndex[metric.Series];
                 if (series.Points == null) return;
@@ -145,7 +148,7 @@ namespace ChartApp.Actors
                 area.AxisX.Minimum = minAxisX;
                 area.AxisX.Maximum = maxAxisX;
                 area.AxisY.Minimum = minAxisY;
-                area.AxisY.Maximum = maxAxisX;
+                area.AxisY.Maximum = maxAxisY;
             }
         }
     }
