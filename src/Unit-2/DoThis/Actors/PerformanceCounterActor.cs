@@ -13,7 +13,7 @@ namespace ChartApp.Actors
         private PerformanceCounter _counter;
 
         private readonly HashSet<IActorRef> _subscriptions;
-        private readonly ICancelable _cancelPublishing;
+        private ICancelable _cancelPublishing;
 
         public PerformanceCounterActor(string seriesName, Func<PerformanceCounter> performanceCounterGenerator)
         {
@@ -25,16 +25,15 @@ namespace ChartApp.Actors
 
         #region Actor lifecycle methods
 
-        protected override void PreStart() //wert: change to ScheduleTellRepeatedlyCancelable
+        protected override void PreStart()
         {
             _counter = _performanceCounterGenerator();
-            Context.System.Scheduler.ScheduleTellRepeatedly(
+            var _cancelPublishing = Context.System.Scheduler.ScheduleTellRepeatedlyCancelable(
                 TimeSpan.FromMilliseconds(250),
                 TimeSpan.FromMilliseconds(250),
                 Self,
                 new GatherMetrics(),
-                Self,
-                _cancelPublishing);
+                Self);
         }
 
         protected override void PostStop()
