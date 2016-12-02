@@ -96,9 +96,9 @@ namespace GithubActors.Actors
                 //launch the new window to view results of the processing
                 Context.ActorSelection(ActorPaths.MainFormActor.Path).Tell(
                     new MainFormActor.LaunchRepoResultsWindow(job.Repo, Sender));
-            });
 
-            BecomeReady();
+                BecomeReady();
+            });
         }
 
         private void BecomeReady()
