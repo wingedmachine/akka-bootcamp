@@ -68,7 +68,7 @@ namespace GithubActors.Actors
         private void BecomeAsking()
         {
             _canAcceptJobSender = Sender;
-            _pendingJobReplies = 3;
+            _pendingJobReplies = _coordinator.Ask<Routees>(new GetRoutees()).Result.Members.Count(); //wert
             Become(Asking);
         }
 
@@ -109,7 +109,8 @@ namespace GithubActors.Actors
 
         protected override void PreStart()
         {
-            _coordinator = Context.ActorOf(Props.Create(() => new GithubCoordinatorActor()), ActorPaths.GithubCoordinatorActor.Name);
+            _coordinator = Context.ActorOf(Props.Create(() => new GithubCoordinatorActor())
+                .WithRouter(FromConfig.Instance), ActorPaths.GithubCoordinatorActor.Name);
             base.PreStart();
         }
 
