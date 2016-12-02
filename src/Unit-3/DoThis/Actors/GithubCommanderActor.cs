@@ -68,7 +68,7 @@ namespace GithubActors.Actors
         private void BecomeAsking()
         {
             _canAcceptJobSender = Sender;
-            _pendingJobReplies = _coordinator.Ask<Routees>(new GetRoutees()).Result.Members.Count(); //wert
+            _pendingJobReplies = _coordinator.Ask<Routees>(new GetRoutees()).Result.Members.Count();
             Become(Asking);
         }
 
@@ -116,12 +116,8 @@ namespace GithubActors.Actors
 
         protected override void PreRestart(Exception reason, object message)
         {
-            var c1 = Context.ActorOf(Props.Create(() => new GithubCoordinatorActor()),
-                ActorPaths.GithubCoordinatorActor.Name + "1");
-            var c2 = Context.ActorOf(Props.Create(() => new GithubCoordinatorActor()),
-                ActorPaths.GithubCoordinatorActor.Name + "2");
-            var c3 = Context.ActorOf(Props.Create(() => new GithubCoordinatorActor()),
-                ActorPaths.GithubCoordinatorActor.Name + "3");
+            _coordinator.Tell(PoisonPill.Instance);
+            base.PreRestart(reason, message);
         }
     }
 }
